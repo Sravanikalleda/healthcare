@@ -1,0 +1,28 @@
+apiversion: apps/v1
+kind: Deployment metadata:
+name: healthcare
+Spec:
+replicas: 1 selector:
+matchLabels:
+app: healthcare
+template:
+metadata: labels:
+app: healthcare
+spec:
+containers:
+- name: healthcare image: healthcare-sravsimage
+- containerPort: 8082
+
+
+---
+
+
+apiversion: v1 kind: Service metadata:
+name: healthcare
+spec:
+selector:
+app: healthcare
+type: NodePort ports:
+- port: 80
+targetPort: 8082
+nodePort: 30007
